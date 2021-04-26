@@ -6,37 +6,65 @@ import WeatherCard from './WeatherCard';
 const list = [1, 2, 3, 4, 5];
 
 function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
+  const [hide, setHide] = React.useState(false);
+  const { className, style, onClick, currentSlide, slideCount } = props;
+
+  const handleNextArrowClick = () => {
+    if (currentSlide + 3 === slideCount - 1) {
+      setHide(true);
+    }
+    onClick();
+  };
+
   return (
-    <ForwardIcon
-      className={className}
-      style={{
-        ...style,
-        fontSize: 70,
-        color: 'blue',
-        top: -25,
-        right: 20,
-      }}
-      onClick={onClick}
-    />
+    <>
+      {!hide && (
+        <ForwardIcon
+          className={className}
+          style={{
+            ...style,
+            fontSize: 70,
+            color: 'blue',
+            top: -25,
+            right: 20,
+          }}
+          onClick={handleNextArrowClick}
+          data-testid="nextArrow"
+        />
+      )}
+    </>
   );
 }
 
 function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
+  const [hide, setHide] = React.useState(true);
+  const { className, style, onClick, currentSlide, slideCount } = props;
+
+  const handlePrevArrowClick = () => {
+    if (currentSlide === 0) {
+      setHide(true);
+    }
+    onClick();
+  };
   return (
-    <ForwardIcon
-      className={className}
-      style={{
-        ...style,
-        fontSize: 70,
-        color: 'blue',
-        transform: `rotate(180deg)`,
-        top: -60,
-        left: 30,
-      }}
-      onClick={onClick}
-    />
+    <>
+      {!hide && (
+        <ForwardIcon
+          className={className}
+          style={{
+            ...style,
+            fontSize: 70,
+            color: 'blue',
+            transform: `rotate(180deg)`,
+            top: -60,
+            left: 30,
+          }}
+          id="prevArrow"
+          onClick={onClick}
+          data-testid="prevArrow"
+        />
+      )}
+    </>
   );
 }
 
