@@ -1,8 +1,8 @@
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
-import ScaleRadioButtons from '../components/content/scale/ScaleRadioButtons';
-import WeatherBarChartList from '../components/content/weather/charts/WeatherBarChartList';
-import WeatherCardsList from '../components/content/weather/WeatherCardsList';
+import ScaleRadioButtons from '../../Scales/components/ScaleRadioButtons';
+import WeatherBarChartList from '../components/charts/WeatherBarChartList';
+import WeatherCardsList from '../components/WeatherCardsList';
 
 const WeatherInfoScreen = () => {
   return (

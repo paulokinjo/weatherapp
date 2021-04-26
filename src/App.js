@@ -1,13 +1,23 @@
 import './App.css';
 
-import WeatherInfoScreen from './screens/WeatherInfoScreen';
+import LoadingScreen from './screens/LoadingScreen';
+import React from 'react';
+import WeatherInfoScreen from './Weather/screens/WeatherInfoScreen';
 
-function App() {
+const App = () => {
+  const [loading, setLoading] = React.useState(true);
+  React.useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+  }, []);
+
   return (
     <div className="App">
-      <WeatherInfoScreen />
+      {loading && <LoadingScreen />}
+      {!loading && <WeatherInfoScreen />}
     </div>
   );
-}
+};
 
 export default App;
