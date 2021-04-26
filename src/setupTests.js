@@ -5,10 +5,6 @@
 import '@testing-library/jest-dom';
 import 'raf/polyfill';
 
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { configure } from 'enzyme';
-
-configure({ adapter: new Adapter() });
 window.matchMedia =
   window.matchMedia ||
   function () {

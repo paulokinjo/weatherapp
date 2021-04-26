@@ -1,17 +1,8 @@
 import React from 'react';
 import ScaleRadioButtons from './ScaleRadioButtons';
 import { render } from '@testing-library/react';
-import { shallow } from 'enzyme';
 
 describe('ScaleRadioButtons', () => {
-  const scaleRadioButtons = shallow(<ScaleRadioButtons />);
-
-  describe('Layout', () => {
-    it('should render properly', () => {
-      expect(scaleRadioButtons).toMatchSnapshot();
-    });
-  });
-
   describe('Lifecycle', () => {
     it('should initialize Fahrenheit as default value', () => {
       const { queryByLabelText } = render(<ScaleRadioButtons />);

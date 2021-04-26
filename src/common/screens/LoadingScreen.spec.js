@@ -1,28 +1,23 @@
+import CircularProgress from '@material-ui/core/CircularProgress';
 import LoadingScreen from './LoadingScreen';
 import React from 'react';
 import { render } from '@testing-library/react';
-import { shallow } from 'enzyme';
 
+const setup = () => {
+  return render(<LoadingScreen />);
+};
 describe('LoadingScreen', () => {
-  const loadingScreen = shallow(<LoadingScreen />);
-
   describe('Layout', () => {
-    it('should render properly', () => {
-      expect(loadingScreen).toMatchSnapshot();
-    });
-  });
-
-  describe('Lifecycle', () => {
     it('should show loading message', () => {
-      const { queryByText } = render(<LoadingScreen />);
+      const { queryByText } = setup();
 
       const loadingMessage = queryByText('Loading...');
 
       expect(loadingMessage).toBeInTheDocument();
     });
 
-    it('should show loading icon', () => {
-      const { container } = render(<LoadingScreen />);
+    it('should show loading spinner icon', () => {
+      const { container } = setup();
 
       const circle = container.querySelector('circle');
 

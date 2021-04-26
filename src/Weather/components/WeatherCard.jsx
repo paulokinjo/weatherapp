@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const WeatherCard = () => {
+const WeatherCard = ({ info }) => {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -50,7 +50,7 @@ const WeatherCard = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small">Learn More - {info}</Button>
       </CardActions>
     </Card>
   );

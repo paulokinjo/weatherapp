@@ -1,21 +1,19 @@
-import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
 
-import LoadingScreen from './screens/LoadingScreen';
-import React from 'react';
-import WeatherInfoScreen from './Weather/screens/WeatherInfoScreen';
+import LoadingScreen from './common/screens/LoadingScreen';
+import WeatherInfoScreen from './weather/screens/WeatherInfoScreen';
+import { getWeather } from './store/weather/weatherActions';
+import { useEffect } from 'react';
 
 const App = () => {
-  const [loading, setLoading] = React.useState(true);
-  React.useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
-  }, []);
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.loading);
+
+  useEffect(() => dispatch(getWeather()), [dispatch]);
 
   return (
     <div className="App">
-      {loading && <LoadingScreen />}
-      {!loading && <WeatherInfoScreen />}
+      {loading ? <LoadingScreen /> : <WeatherInfoScreen />}
     </div>
   );
 };

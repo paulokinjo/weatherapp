@@ -1,17 +1,12 @@
 import CircularProgress from '@material-ui/core/CircularProgress';
+import LoadingStyles from './styles/loadingScreen.styles';
 import React from 'react';
 
 const LoadingScreen = () => {
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: '45%',
-        left: '45%',
-      }}
-    >
+    <div style={LoadingStyles.spinner}>
       <CircularProgress />
-      <span style={{ paddingLeft: '20px' }}>Loading...</span>
+      <p>Loading...</p>
     </div>
   );
 };
