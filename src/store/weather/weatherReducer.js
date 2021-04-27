@@ -2,14 +2,22 @@ import * as types from './weatherTypes';
 
 const initialState = {
   data: [],
+  cards: [],
 };
 
 const weatherReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_WEATHER:
       return {
-        data: ['1', '2', '3', '4', '5'],
+        ...state,
+        data: action.weatherData,
       };
+    case types.FILTER_CARDS_BY_DATE: {
+      return {
+        ...state,
+        cards: action.cards,
+      };
+    }
     default:
       return state;
   }

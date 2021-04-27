@@ -1,12 +1,20 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Grid from '@material-ui/core/Grid';
-import React from 'react';
 import ScaleRadioButtons from '../../scale/components/ScaleRadioButtons';
 import WeatherBarChartList from '../components/charts/WeatherBarChartList';
 import WeatherCardsList from '../components/WeatherCardsList';
-import { useSelector } from 'react-redux';
+import { filterCardsByDate } from '../../store/weather/weatherActions';
 
 const WeatherInfoScreen = () => {
+  const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather.data);
+  const weatherCardsData = useSelector((state) => state.weather.cards);
+
+  useEffect(() => {
+    if (weatherData.length) dispatch(filterCardsByDate(weatherData));
+  }, [dispatch, weatherData]);
 
   return (
     <>
@@ -25,7 +33,9 @@ const WeatherInfoScreen = () => {
             <ScaleRadioButtons />
           </Grid>
           <Grid item xs={12} style={{ marginTop: '30px' }}>
-            {weatherData && <WeatherCardsList weatherData={weatherData} />}
+            {weatherCardsData && (
+              <WeatherCardsList weatherData={weatherCardsData} />
+            )}
           </Grid>
           <Grid item xs={12}>
             <WeatherBarChartList />

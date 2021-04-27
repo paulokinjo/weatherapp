@@ -65,7 +65,7 @@ const WeatherCardsList = ({ weatherData }) => {
     <>
       <Slider {...settings}>
         {weatherData.map((data) => (
-          <div key={data}>
+          <div key={data.dt}>
             <WeatherCard info={data} />
           </div>
         ))}

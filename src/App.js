@@ -9,7 +9,9 @@ const App = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading);
 
-  useEffect(() => dispatch(getWeather()), [dispatch]);
+  useEffect(() => {
+    dispatch(getWeather());
+  }, [dispatch]);
 
   return (
     <div className="App">
