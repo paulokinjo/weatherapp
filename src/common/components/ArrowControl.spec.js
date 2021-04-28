@@ -1,26 +1,50 @@
+import { fireEvent, render } from '@testing-library/react';
+
 import ArrowControl from './ArrowControl';
 import React from 'react';
-import { render } from '@testing-library/react';
 
 const setup = (props) => {
   return render(<ArrowControl {...props} />);
 };
+
 describe('ArrowControl', () => {
+  const className = 'slick-arrow';
+  let container;
+
   describe('Layout', () => {
     it('should render if visible', () => {
       const { container } = setup({
         isVisible: true,
-        className: 'slick-arrow',
+        className,
       });
-      expect(container.querySelector('.slick-arrow')).toBeInTheDocument();
+      expect(
+        container.querySelector('.'.concat(className))
+      ).toBeInTheDocument();
     });
 
     it('should not render if visible is set to false', () => {
       const { container } = setup({
         isVisible: false,
-        className: 'slick-arrow',
+        className,
       });
-      expect(container.querySelector('.slick-arrow')).not.toBeInTheDocument();
+      expect(container.querySelector(className)).not.toBeInTheDocument();
+    });
+  });
+
+  describe('Lifecycle', () => {
+    it('should raise an event if clicked', () => {
+      const mockClick = jest.fn();
+      const { container } = setup({
+        isVisible: true,
+        className,
+        onClick: mockClick,
+      });
+
+      const component = container.querySelector('.'.concat(className));
+
+      fireEvent.click(component);
+
+      expect(mockClick).toHaveBeenCalledTimes(1);
     });
   });
 });

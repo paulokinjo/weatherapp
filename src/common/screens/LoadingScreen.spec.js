@@ -1,4 +1,3 @@
-import CircularProgress from '@material-ui/core/CircularProgress';
 import LoadingScreen from './LoadingScreen';
 import React from 'react';
 import { render } from '@testing-library/react';
@@ -6,6 +5,7 @@ import { render } from '@testing-library/react';
 const setup = () => {
   return render(<LoadingScreen />);
 };
+
 describe('LoadingScreen', () => {
   describe('Layout', () => {
     it('should show loading message', () => {

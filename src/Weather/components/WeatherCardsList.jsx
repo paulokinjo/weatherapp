@@ -4,19 +4,17 @@ import ArrowControl from '../../common/components/ArrowControl';
 import React from 'react';
 import Slider from 'react-slick';
 import WeatherCard from './WeatherCard';
-import { setCurrentPage } from '../../store/common/components/actions/arrowControlActions';
+import { selectCard } from '../store/actions/weatherActions';
+import { setCurrentCard } from '../../common/store/components/actions/arrowControlActions';
 
-const WeatherCardsList = ({ weatherData }) => {
-  const dispatch = useDispatch();
-  const arrowControlState = useSelector((state) => state.arrow);
-
-  const settings = {
+const settings = (dispatch, nextArrow, prevArrow) => {
+  return {
     infinite: false,
     speed: 300,
     slidesToShow: 3,
     slidesToScroll: 1,
     swipeToSlide: true,
-    focusOnSelect: true,
+    focusOnSelect: false,
     nextArrow: (
       <ArrowControl
         customStyle={{
@@ -24,35 +22,28 @@ const WeatherCardsList = ({ weatherData }) => {
           right: '25%',
           transform: 'rotate(360deg)',
         }}
-        isVisible={arrowControlState.nextArrow}
-        dispatch={dispatch}
+        isVisible={nextArrow}
+        id="nextArrow"
       />
     ),
     prevArrow: (
       <ArrowControl
         customStyle={{ top: '-83px', left: '18%', transform: 'rotate(180deg)' }}
-        isVisible={arrowControlState.prevArrow}
-        dispatch={dispatch}
+        isVisible={prevArrow}
+        id="prevArrow"
       />
     ),
-    afterChange: (current) => dispatch(setCurrentPage(current)),
+    afterChange: (current) => dispatch(setCurrentCard(current)),
     responsive: [
       {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 600,
+        breakpoint: 1365,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 1023,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -60,16 +51,38 @@ const WeatherCardsList = ({ weatherData }) => {
       },
     ],
   };
+};
+
+const WeatherCardsList = ({ weatherData }) => {
+  const dispatch = useDispatch();
+  const arrowControlState = useSelector((state) => state.common.arrowControls);
+  const scale = useSelector((state) => state.scale.components);
+
+  const handleCardSelection = (selectedCard) => {
+    dispatch(selectCard(selectedCard));
+  };
 
   return (
     <>
-      <Slider {...settings}>
-        {weatherData.map((data) => (
-          <div key={data.dt}>
-            <WeatherCard info={data} />
-          </div>
-        ))}
-      </Slider>
+      {arrowControlState && (
+        <Slider
+          {...settings(
+            dispatch,
+            arrowControlState.nextArrow,
+            arrowControlState.prevArrow
+          )}
+        >
+          {weatherData.map((data) => (
+            <div key={data.dt}>
+              <WeatherCard
+                info={data}
+                scale={scale}
+                onCardSelection={() => handleCardSelection(data)}
+              />
+            </div>
+          ))}
+        </Slider>
+      )}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import * as actions from './loadingActions';
-import * as types from './screenTypes';
+import * as types from '../screenTypes';
 
 describe('[Actions] Loading', () => {
   it('creates an action to set the loading', () => {

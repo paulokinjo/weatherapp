@@ -1,8 +1,14 @@
-import * as arrowControlActions from '../common/components/actions/arrowControlActions';
-import * as loadingActions from '../common/screen/actions/loadingActions';
+import * as arrowControlActions from '../../../common/store/components/actions/arrowControlActions';
+import * as loadingActions from '../../../common/store/screen/actions/loadingActions';
 
-import { FILTER_CARDS_BY_DATE, GET_WEATHER } from './weatherTypes';
+import {
+  FILTER_CARDS_BY_DATE,
+  GET_WEATHER,
+  SELECT_CARD,
+  SET_ERROR,
+} from '../weatherTypes';
 
+import { SET_ALERT } from '../../../common/store/components/componentTypes';
 import axios from 'axios';
 
 export const filterCardsByDate = (data) => {
@@ -25,9 +31,7 @@ export const filterCardsByDate = (data) => {
           closestIndex = i;
         }
       } else {
-        if (closestIndex !== -1) {
-          cards.push(data[closestIndex]);
-        }
+        cards.push(data[closestIndex]);
 
         currentDate = dateKeys[i];
         closestDate = Math.abs(currentDate.getHours() - now.getHours());
@@ -35,11 +39,23 @@ export const filterCardsByDate = (data) => {
       }
     }
 
-    if (closestIndex !== -1) {
-      cards.push(data[closestIndex]);
-    }
+    cards.push(data[closestIndex]);
 
-    dispatch({ type: FILTER_CARDS_BY_DATE, cards });
+    dispatch(arrowControlActions.setTotalCards(cards.length));
+
+    dispatch({
+      type: FILTER_CARDS_BY_DATE,
+      cards: {
+        all: cards,
+        selected: [],
+      },
+    });
+  };
+};
+
+export const selectCard = (selected) => {
+  return (dispatch) => {
+    dispatch({ type: SELECT_CARD, selected });
   };
 };
 
@@ -60,10 +76,18 @@ export const getWeather = () => {
 
       dispatch(arrowControlActions.hidePrevArrow());
       dispatch(arrowControlActions.showNextArrow());
-
-      dispatch(loadingActions.setLoading(false));
     } catch (error) {
-      console.log(error);
+      dispatch({ type: SET_ERROR, error: error.message });
+      dispatch({ type: SET_ALERT, message: error.message });
+    } finally {
+      dispatch(loadingActions.setLoading(false));
     }
+  };
+};
+
+export const setError = (error) => {
+  return {
+    type: SET_ERROR,
+    error,
   };
 };

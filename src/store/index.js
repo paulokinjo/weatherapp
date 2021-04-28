@@ -1,15 +1,15 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 
-import arrowControlReducer from './common/components/reducers/arrowControlReducer';
+import commonRootReducer from '../common/store/commonRootReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import loadingReducer from './common/screen/reducers/loadingReducer';
+import scaleRootReducer from '../scale/store/scaleRootReducer';
 import thunk from 'redux-thunk';
-import weatherReducer from './weather/weatherReducer';
+import weatherRootReducer from '../weather/store/weatherRootReducer';
 
 const rootReducer = combineReducers({
-  weather: weatherReducer,
-  loading: loadingReducer,
-  arrow: arrowControlReducer,
+  weather: weatherRootReducer,
+  common: commonRootReducer,
+  scale: scaleRootReducer,
 });
 
 const store = createStore(

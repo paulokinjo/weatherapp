@@ -1,6 +1,6 @@
-const ArrowControlStyles = {
+const arrowControlStyles = {
   fontSize: 70,
   color: 'blue',
 };
 
-export default ArrowControlStyles;
+export default arrowControlStyles;

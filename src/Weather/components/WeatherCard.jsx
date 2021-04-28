@@ -1,5 +1,3 @@
-import * as convertions from '../../scale/utils/convertions';
-
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -8,11 +6,13 @@ import CardMedia from '@material-ui/core/CardMedia';
 import OpacityIcon from '@material-ui/icons/Opacity';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import { getScale } from '../../scale/utils/convertions';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
     margin: '10px',
+    padding: '10px',
   },
   bullet: {
     display: 'inline-block',
@@ -22,19 +22,28 @@ const useStyles = makeStyles({
   title: {
     fontSize: 14,
   },
-  pos: {
-    marginBottom: 12,
-  },
   media: {
     paddingTop: '46.25%',
   },
 });
 
-const WeatherCard = ({ info }) => {
+const WeatherCard = ({ info, scale, onCardSelection }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card
+      className={classes.root}
+      onClick={onCardSelection}
+      style={
+        info.isSelected
+          ? {
+              border: '2px solid rgb(86, 180, 239)',
+              boxShadow:
+                '0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(82, 168, 236, 0.6)',
+            }
+          : {}
+      }
+    >
       <CardMedia
         className={classes.media}
         image={`http://openweathermap.org/img/wn/${info.weather[0].icon}@2x.png`}
@@ -48,26 +57,26 @@ const WeatherCard = ({ info }) => {
           {info.weather[0].main} ({info.weather[0].description})
         </Typography>
         <Typography variant="h3" component="h5" align="center">
-          {convertions.toFahrenheit(info.main.temp)}
-          <sup>&#8457;</sup>
+          {getScale(info.main.temp, scale)}
+          <hr />
         </Typography>
-        <Typography className={classes.pos} color="textSecondary"></Typography>
-        <Typography variant="body2" component="p" align="right">
-          {convertions.toFahrenheit(info.main.temp_min)}
-          <sup>&#8457;</sup> / {convertions.toFahrenheit(info.main.temp_max)}
-          <sup>&#8457;</sup>
+        <Typography variant="body2" align="center" color="secondary">
+          Feels like: {getScale(info.main.feels_like, scale)}
           <br />
-          Feels like {convertions.toFahrenheit(info.main.feels_like)}
-          <sup>&#8457;</sup>
-          <br />
-          <span style={{ paddingLeft: 5 }}>Wind {info.wind.speed} m/s</span>
+          <span>Wind {info.wind.speed} m/s</span>
         </Typography>
       </CardContent>
       <CardActions>
         <Button size="small">
-          <OpacityIcon /> {info.main.humidity}%
+          <OpacityIcon color="primary" /> {info.main.humidity}%
         </Button>
-        <Button size="small">{info.dt_txt}</Button>
+        <Button size="large" style={{ flex: 1 }}>
+          {new Date(info.dt_txt).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </Button>
       </CardActions>
     </Card>
   );

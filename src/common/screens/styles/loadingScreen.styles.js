@@ -1,10 +1,9 @@
 const LoadingStyles = {
   spinner: {
-    position: 'fixed',
-    top: '50%',
+    position: 'absolute',
     left: '50%',
-    marginTop: '-10px',
-    marginLeft: '-50px',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
   },
 };
 

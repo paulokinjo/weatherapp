@@ -1,9 +1,11 @@
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import WeatherBarChart from './WeatherBarChart';
+import { useSelector } from 'react-redux';
 
-const list = [1, 2, 3, 4, 5, 6, 7, 8];
-const WeatherBarChartList = () => {
+const WeatherBarChartList = ({ weatherData }) => {
+  const scale = useSelector((state) => state.scale.components);
+
   return (
     <>
       <Grid
@@ -15,9 +17,9 @@ const WeatherBarChartList = () => {
         alignItems="flex-end"
         style={{ marginTop: '20px' }}
       >
-        {list.map((l) => (
-          <Grid key={l} item xs={2} sm={1}>
-            <WeatherBarChart />
+        {weatherData.map((data) => (
+          <Grid key={data.dt} item xs={3} sm={1} style={{ marginLeft: 15 }}>
+            <WeatherBarChart weatherData={data} scale={scale} />
           </Grid>
         ))}
       </Grid>

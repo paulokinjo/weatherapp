@@ -1,11 +1,11 @@
-import * as types from '../actions/componentTypes';
+import * as types from '../componentTypes';
 
 const initialState = {
   prevArrow: false,
-  nextArrow: false,
-  currentPage: 1,
-  totalPages: 5,
-  numItemToShow: 3,
+  nextArrow: true,
+  currentCard: 1,
+  totalCards: 5,
+  totalCardsToShow: 3,
 };
 
 const arrowControlReducer = (state = initialState, action) => {
@@ -34,14 +34,21 @@ const arrowControlReducer = (state = initialState, action) => {
         prevArrow: action.isVisible,
       };
 
-    case types.SET_CURRENT_PAGE:
+    case types.SET_CURRENT_CARD:
       const isLastPage =
-        action.pageNum + state.numItemToShow === state.totalPages;
+        action.cardNum + state.totalCardsToShow >= state.totalCards;
       return {
         ...state,
-        currentPage: action.pageNum,
+        currentCard: action.cardNum,
         nextArrow: !isLastPage,
       };
+
+    case types.SET_TOTAL_CARDS: {
+      return {
+        ...state,
+        totalCards: action.totalCards,
+      };
+    }
 
     default:
       return state;

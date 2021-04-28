@@ -5,16 +5,20 @@ import Grid from '@material-ui/core/Grid';
 import ScaleRadioButtons from '../../scale/components/ScaleRadioButtons';
 import WeatherBarChartList from '../components/charts/WeatherBarChartList';
 import WeatherCardsList from '../components/WeatherCardsList';
-import { filterCardsByDate } from '../../store/weather/weatherActions';
+import { filterCardsByDate } from '../store/actions/weatherActions';
+import { setScale } from '../../scale/store/components/actions/scaleComponentActions';
 
 const WeatherInfoScreen = () => {
   const dispatch = useDispatch();
-  const weatherData = useSelector((state) => state.weather.data);
-  const weatherCardsData = useSelector((state) => state.weather.cards);
+  const weather = useSelector((state) => state.weather.reducer);
 
   useEffect(() => {
-    if (weatherData.length) dispatch(filterCardsByDate(weatherData));
-  }, [dispatch, weatherData]);
+    if (weather?.data?.length) dispatch(filterCardsByDate(weather.data));
+  }, [dispatch, weather.data]);
+
+  const handleScaleChange = (event) => {
+    dispatch(setScale(event.target.value));
+  };
 
   return (
     <>
@@ -30,15 +34,17 @@ const WeatherInfoScreen = () => {
           style={{ marginTop: '10px' }}
         >
           <Grid item xs={12}>
-            <ScaleRadioButtons />
-          </Grid>
-          <Grid item xs={12} style={{ marginTop: '30px' }}>
-            {weatherCardsData && (
-              <WeatherCardsList weatherData={weatherCardsData} />
+            {weather?.data?.length && (
+              <ScaleRadioButtons onChange={handleScaleChange} />
             )}
           </Grid>
-          <Grid item xs={12}>
-            <WeatherBarChartList />
+          <Grid item xs={12} style={{ marginTop: '30px' }}>
+            {weather && <WeatherCardsList weatherData={weather.cards.all} />}
+          </Grid>
+          <Grid item xs={12} style={{ minHeight: 250, marginTop: -25 }}>
+            {weather && (
+              <WeatherBarChartList weatherData={weather.cards.selected} />
+            )}
           </Grid>
         </Grid>
         <Grid item xs={false} sm={2} />

@@ -1,4 +1,4 @@
-import * as types from './screenTypes';
+import * as types from '../screenTypes';
 
 export const setLoading = (isLoading) => {
   return {

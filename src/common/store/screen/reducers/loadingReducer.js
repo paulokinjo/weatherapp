@@ -1,4 +1,4 @@
-import * as types from '../actions/screenTypes';
+import * as types from '../screenTypes';
 
 const loadingReducer = (state = false, action) => {
   switch (action.type) {

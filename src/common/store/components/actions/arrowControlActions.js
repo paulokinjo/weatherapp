@@ -1,4 +1,6 @@
-import * as types from './componentTypes';
+import * as types from '../componentTypes';
+
+import { selectCard } from '../../../../weather/store/actions/weatherActions';
 
 export const hideNextArrow = () => {
   return {
@@ -28,17 +30,26 @@ export const showPrevArrow = () => {
   };
 };
 
-export const setCurrentPage = (pageNum) => {
+export const setCurrentCard = (cardNum) => {
   return (dispatch) => {
-    if (pageNum > 0) {
+    if (cardNum > 0) {
       dispatch(showPrevArrow());
     } else {
       dispatch(hidePrevArrow());
     }
 
     dispatch({
-      type: types.SET_CURRENT_PAGE,
-      pageNum,
+      type: types.SET_CURRENT_CARD,
+      cardNum,
     });
+
+    dispatch(selectCard(undefined));
+  };
+};
+
+export const setTotalCards = (totalCards) => {
+  return {
+    type: types.SET_TOTAL_CARDS,
+    totalCards,
   };
 };
