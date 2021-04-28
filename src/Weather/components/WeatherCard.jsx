@@ -7,28 +7,10 @@ import OpacityIcon from '@material-ui/icons/Opacity';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { getScale } from '../../scale/utils/convertions';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles({
-  root: {
-    margin: '10px',
-    padding: '10px',
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  media: {
-    paddingTop: '46.25%',
-  },
-});
+import weatherCardStyles from './styles/weatherCard.styles';
 
 const WeatherCard = ({ info, scale, onCardSelection }) => {
-  const classes = useStyles();
+  const classes = weatherCardStyles();
 
   return (
     <Card

@@ -2,10 +2,11 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import WeatherBarChart from './WeatherBarChart';
 import { useSelector } from 'react-redux';
+import weatherBarChartListStyles from './styles/weatherBarCharList.styles';
 
 const WeatherBarChartList = ({ weatherData }) => {
   const scale = useSelector((state) => state.scale.components);
-
+  const classes = weatherBarChartListStyles();
   return (
     <>
       <Grid
@@ -15,10 +16,16 @@ const WeatherBarChartList = ({ weatherData }) => {
         spacing={2}
         direction="row"
         alignItems="flex-end"
-        style={{ marginTop: '20px' }}
+        className={classes.root}
       >
         {weatherData.map((data) => (
-          <Grid key={data.dt} item xs={3} sm={1} style={{ marginLeft: 15 }}>
+          <Grid
+            key={data.dt}
+            item
+            xs={3}
+            sm={1}
+            className={classes.containerItem}
+          >
             <WeatherBarChart weatherData={data} scale={scale} />
           </Grid>
         ))}

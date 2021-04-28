@@ -1,7 +1,7 @@
 import ForwardIcon from '@material-ui/icons/Forward';
-import arrowControlStyles from './styles/arrowControl.styles';
 
 const ArrowControl = (props) => {
+  const defaultStyle = { fontSize: 70, color: 'blue' };
   const { className, style, onClick, customStyle, isVisible } = props;
 
   return (
@@ -9,7 +9,7 @@ const ArrowControl = (props) => {
       {isVisible && (
         <ForwardIcon
           className={className}
-          style={{ ...style, ...arrowControlStyles, ...customStyle }}
+          style={{ ...style, ...defaultStyle, ...customStyle }}
           onClick={onClick}
         />
       )}

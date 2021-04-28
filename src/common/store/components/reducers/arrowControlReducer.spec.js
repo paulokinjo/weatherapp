@@ -66,6 +66,16 @@ describe('[Reducers] ArrowControl', () => {
         type: types.SET_TOTAL_CARDS,
         totalCards,
       })
-    ).toEqual({ ...arrow, totalCards: totalCards });
+    ).toEqual({ ...arrow, totalCards });
+  });
+
+  it('should set the total cards to show', () => {
+    const totalCardsToShow = 1;
+    expect(
+      arrowControlReducer(undefined, {
+        type: types.SET_TOTAL_CARDS_TO_SHOW,
+        totalCardsToShow,
+      })
+    ).toEqual({ ...arrow, totalCardsToShow });
   });
 });

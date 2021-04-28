@@ -65,7 +65,7 @@ export const getWeather = () => {
       dispatch(loadingActions.setLoading(true));
 
       const request = await axios.get(
-        'http://api.openweathermap.org/data/2.5/forecast?q='
+        'https://api.openweathermap.org/data/2.5/forecast?q='
           .concat(process.env.REACT_APP_CITY)
           .concat('&APPID=')
           .concat(process.env.REACT_APP_API_KEY)

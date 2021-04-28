@@ -53,3 +53,10 @@ export const setTotalCards = (totalCards) => {
     totalCards,
   };
 };
+
+export const setTotalCardsToShow = (totalCardsToShow) => {
+  return {
+    type: types.SET_TOTAL_CARDS_TO_SHOW,
+    totalCardsToShow,
+  };
+};

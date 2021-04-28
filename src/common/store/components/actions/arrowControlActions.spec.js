@@ -77,4 +77,15 @@ describe('[Actions] ArrowControl', () => {
     const expectedAction = { type: types.SET_TOTAL_CARDS, totalCards };
     expect(actions.setTotalCards(totalCards)).toEqual(expectedAction);
   });
+
+  it('creates an action to set the total cards to show', () => {
+    const totalCardsToShow = 1;
+    const expectedAction = {
+      type: types.SET_TOTAL_CARDS_TO_SHOW,
+      totalCardsToShow,
+    };
+    expect(actions.setTotalCardsToShow(totalCardsToShow)).toEqual(
+      expectedAction
+    );
+  });
 });

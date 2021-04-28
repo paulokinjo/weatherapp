@@ -106,7 +106,7 @@ describe('App', () => {
 
       setup(store);
 
-      expect(mockDispatchFn).toHaveBeenCalledTimes(1);
+      expect(mockDispatchFn).toHaveBeenCalled();
 
       //teardown
       useDispatchSpy.mockClear();

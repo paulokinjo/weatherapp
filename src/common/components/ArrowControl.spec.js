@@ -9,7 +9,6 @@ const setup = (props) => {
 
 describe('ArrowControl', () => {
   const className = 'slick-arrow';
-  let container;
 
   describe('Layout', () => {
     it('should render if visible', () => {

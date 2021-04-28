@@ -1,30 +1,18 @@
 import Paper from '@material-ui/core/Paper';
 import React from 'react';
 import { getScale } from '../../../scale/utils/convertions';
+import weatherBarChartStyles from './styles/weatherBarChart.styles';
 
 const WeatherBarChart = ({ weatherData, scale }) => {
+  const classes = weatherBarChartStyles();
   return (
-    <div
-      style={{
-        textAlign: 'center',
-      }}
-    >
+    <div className={classes.root}>
       <Paper
-        style={{
-          height: (weatherData.main.temp / 3).toString().concat('px'),
-          width: '60px',
-          backgroundColor: 'aqua',
-          maxWidth: 100,
-          margin: 'auto',
-          transition: '0.3s',
-          boxShadow: '0 8px 40px -12px rgba(0,0,0,0.3)',
-          '&:hover': {
-            boxShadow: '0 16px 70px -12.125px rgba(0,0,0,0.3)',
-          },
-        }}
+        className={classes.paper}
+        style={{ height: (weatherData.main.temp / 3).toString().concat('px') }}
         elevation={10}
       >
-        {weatherData.dt_txt.split(' ')[1]}
+        <span className={classes.date}>{weatherData.dt_txt.split(' ')[1]}</span>
         <img
           src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
           alt="weatherInfo"
@@ -32,7 +20,9 @@ const WeatherBarChart = ({ weatherData, scale }) => {
         />
         {weatherData.weather[0].main}
       </Paper>
-      {getScale(weatherData.main.temp, scale)}
+      <span className={classes.temperature}>
+        {getScale(weatherData.main.temp, scale)}
+      </span>
     </div>
   );
 };

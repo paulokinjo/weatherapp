@@ -7,10 +7,12 @@ import WeatherBarChartList from '../components/charts/WeatherBarChartList';
 import WeatherCardsList from '../components/WeatherCardsList';
 import { filterCardsByDate } from '../store/actions/weatherActions';
 import { setScale } from '../../scale/store/components/actions/scaleComponentActions';
+import weatherInfoScreenStyles from './styles/weatherInfoScreen.styles';
 
 const WeatherInfoScreen = () => {
   const dispatch = useDispatch();
   const weather = useSelector((state) => state.weather.reducer);
+  const classes = weatherInfoScreenStyles();
 
   useEffect(() => {
     if (weather?.data?.length) dispatch(filterCardsByDate(weather.data));
@@ -31,17 +33,17 @@ const WeatherInfoScreen = () => {
           sm={8}
           direction="column"
           spacing={10}
-          style={{ marginTop: '10px' }}
+          className={classes.main}
         >
           <Grid item xs={12}>
             {weather?.data?.length && (
               <ScaleRadioButtons onChange={handleScaleChange} />
             )}
           </Grid>
-          <Grid item xs={12} style={{ marginTop: '30px' }}>
+          <Grid item xs={12} className={classes.gridWeatherCardsList}>
             {weather && <WeatherCardsList weatherData={weather.cards.all} />}
           </Grid>
-          <Grid item xs={12} style={{ minHeight: 250, marginTop: -25 }}>
+          <Grid item xs={12} className={classes.gridWeatherBarCharList}>
             {weather && (
               <WeatherBarChartList weatherData={weather.cards.selected} />
             )}

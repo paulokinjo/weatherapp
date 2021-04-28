@@ -50,6 +50,13 @@ const arrowControlReducer = (state = initialState, action) => {
       };
     }
 
+    case types.SET_TOTAL_CARDS_TO_SHOW: {
+      return {
+        ...state,
+        totalCardsToShow: action.totalCardsToShow,
+      };
+    }
+
     default:
       return state;
   }
