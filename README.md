@@ -1,6 +1,24 @@
-# Getting Started with Create React App
+# Live Preview
+This project is hosted on [GitHub Page](https://pages.github.com/), you can have a Live Preview click in this link [WeatherApp](http://paulokinjo.github.io/weatherapp)
+
+#
+
+# Getting Started
+This project is fore programmers that sit inside the whole day and would like to have an app to check the weather outside so she does not actually have to go outside to see what it's like.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Environment
+In order to be able to call the [OpenWeatherMap](openweathermap.org/) API, it is required to have a ```.env``` file with the following environment variables:
+```
+REACT_APP_CITY=<YOUR CITY>,<YOUR COUNTRY>
+REACT_APP_API_KEY=<YOUR KEY>
+
+example:
+
+REACT_APP_CITY=Munich,de
+REACT_APP_API_KEY=123456
+```
 
 ## Available Scripts
 
@@ -18,6 +36,9 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+#### `yarn testCoverage`
+Same as ```yarn test``` however it shows the coverage report
 
 ### `yarn build`
 
