@@ -1,10 +1,13 @@
 # Live Preview
-This project is hosted on [GitHub Page](https://pages.github.com/), you can have a Live Preview click in this link [WeatherApp](http://paulokinjo.github.io/weatherapp)
+This project is hosted on [GitHub Pages](https://pages.github.com/), you can have a Live Preview click in this link [WeatherApp](http://paulokinjo.github.io/weatherapp)
 
-#
+# Tools in a Glance
+- [Material UI](https://material-ui.com/)
+- [React Slick](https://react-slick.neostack.com/docs/get-started)
+- [React Redux](https://react-redux.js.org/)
 
 # Getting Started
-This project is fore programmers that sit inside the whole day and would like to have an app to check the weather outside so she does not actually have to go outside to see what it's like.
+This project is for programmers that sit inside the whole day and would like to have an app to check the weather outside so she does not actually have to go outside to see what it's like.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
