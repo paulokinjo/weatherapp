@@ -15,6 +15,7 @@ const setup = (mockStore) => {
 
 describe('WeatherInfoScreen', () => {
   const mockStore = { ...store };
+
   describe('Layout', () => {
     beforeEach(() => {
       mockStore.dispatch({

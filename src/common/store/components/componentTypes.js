@@ -3,6 +3,6 @@ export const SHOW_NEXT_ARROW = 'SHOW_NEXT_ARROW';
 export const SHOW_PREV_ARROW = 'SHOW_PREV_ARROW';
 export const HIDE_PREV_ARROW = 'HIDE_PREV_ARROW';
 export const SET_TOTAL_CARDS = 'SET_TOTAL_CARDS';
+export const SET_ALERT = 'SET_ALERT';
 export const SET_CURRENT_CARD = 'SET_CURRENT_CARD';
 export const SET_TOTAL_CARDS_TO_SHOW = 'SET_TOTAL_CARDS_TO_SHOW';
-export const SET_ALERT = 'SET_ALERT';

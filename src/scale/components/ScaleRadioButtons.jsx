@@ -10,8 +10,8 @@ const ScaleRadioButtons = ({ onChange }) => {
   return (
     <RadioGroup
       row
-      aria-label="position"
-      name="position"
+      aria-label="scales"
+      name="scales"
       defaultValue={FAHRENHEIT}
       onChange={onChange}
     >

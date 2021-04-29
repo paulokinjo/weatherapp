@@ -1,3 +1,5 @@
+import * as constants from '../../common/utils/constants';
+
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,13 +13,14 @@ import weatherCardStyles from './styles/weatherCard.styles';
 
 const WeatherCard = ({ info, scale, onCardSelection }) => {
   const classes = weatherCardStyles();
+  const dateInfo = new Date(info.dt_txt);
 
   return (
     <Card
       className={classes.root}
       onClick={onCardSelection}
       style={
-        info.isSelected
+        info?.isSelected
           ? {
               border: '2px solid rgb(86, 180, 239)',
               boxShadow:
@@ -52,12 +55,9 @@ const WeatherCard = ({ info, scale, onCardSelection }) => {
         <Button size="small">
           <OpacityIcon color="primary" /> {info.main.humidity}%
         </Button>
-        <Button size="large" style={{ flex: 1 }}>
-          {new Date(info.dt_txt).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
+        <Button size="large" style={{ flex: 1, textTransform: 'capitalize' }}>
+          {dateInfo.getDate()} {constants.months[dateInfo.getMonth()]}{' '}
+          {dateInfo.getFullYear()}
         </Button>
       </CardActions>
     </Card>

@@ -5,6 +5,7 @@ import weatherBarChartStyles from './styles/weatherBarChart.styles';
 
 const WeatherBarChart = ({ weatherData, scale }) => {
   const classes = weatherBarChartStyles();
+
   return (
     <div className={classes.root}>
       <Paper

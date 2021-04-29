@@ -1,5 +1,8 @@
 # Live Preview
-This project is hosted on [GitHub Pages](https://pages.github.com/), you can have a Live Preview click in this link [WeatherApp](http://paulokinjo.github.io/weatherapp)
+This project is hosted on [GitHub Pages](https://pages.github.com/), you can have a Live Preview by clicking in this link [WeatherApp](http://paulokinjo.github.io/weatherapp)
+
+# Architecture
+<img src="./docs/architecture.png">
 
 # Tools in a Glance
 - [Material UI](https://material-ui.com/)
@@ -42,6 +45,9 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 #### `yarn testCoverage`
 Same as ```yarn test``` however it shows the coverage report
+
+##### Sample:
+<img src="./docs/CoverageReport.png">
 
 ### `yarn build`
 

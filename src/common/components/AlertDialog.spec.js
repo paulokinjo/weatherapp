@@ -1,10 +1,11 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import AlertDialog from './AlertDialog';
 
 const setup = (props) => {
   return render(<AlertDialog {...props} />);
 };
+
 describe('Alert', () => {
   it('should render title', () => {
     const title = 'Test Title';

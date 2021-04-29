@@ -7,6 +7,7 @@ import weatherBarChartListStyles from './styles/weatherBarCharList.styles';
 const WeatherBarChartList = ({ weatherData }) => {
   const scale = useSelector((state) => state.scale.components);
   const classes = weatherBarChartListStyles();
+
   return (
     <>
       <Grid
