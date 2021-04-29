@@ -1,8 +1,9 @@
+import { fireEvent, render, waitFor } from '@testing-library/react';
+
 import { GET_WEATHER } from '../store/weatherTypes';
 import { Provider } from 'react-redux';
 import React from 'react';
 import WeatherInfoScreen from './WeatherInfoScreen';
-import { render } from '@testing-library/react';
 import store from '../../store';
 
 const setup = (mockStore) => {
@@ -49,6 +50,32 @@ describe('WeatherInfoScreen', () => {
       const { queryByText } = setup(mockStore);
       const fahrenheitRadioButton = queryByText('Fahrenheit');
       expect(fahrenheitRadioButton).toBeInTheDocument();
+    });
+
+    it('displays weather cards list information', () => {
+      const { container } = setup(mockStore);
+
+      const cardsList = container.querySelector('.slick-list');
+
+      expect(cardsList).toBeInTheDocument();
+    });
+
+    it('dose not display bar chart information if no card selected', () => {
+      const { queryByTestId } = setup(mockStore);
+
+      expect(queryByTestId('weatherBarChartList').children.length).toBe(0);
+    });
+
+    it('displays bar chart information from a selected weather card', async () => {
+      const { findByTestId, container } = setup(mockStore);
+
+      const card = container.querySelector('.MuiCardMedia-root');
+
+      await waitFor(() => fireEvent.click(card));
+
+      const bar = await findByTestId('weatherBarChartList');
+
+      expect(bar.children.length).toBeGreaterThan(0);
     });
   });
 });

@@ -44,7 +44,7 @@ const WeatherInfoScreen = () => {
             {weather && <WeatherCardsList weatherData={weather.cards.all} />}
           </Grid>
           <Grid item xs={12} className={classes.gridWeatherBarCharList}>
-            {weather && (
+            {weather && weather.cards.selected && (
               <WeatherBarChartList weatherData={weather.cards.selected} />
             )}
           </Grid>

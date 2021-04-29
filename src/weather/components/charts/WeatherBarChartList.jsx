@@ -18,6 +18,7 @@ const WeatherBarChartList = ({ weatherData }) => {
         direction="row"
         alignItems="flex-end"
         className={classes.root}
+        data-testid="weatherBarChartList"
       >
         {weatherData.map((data) => (
           <Grid
