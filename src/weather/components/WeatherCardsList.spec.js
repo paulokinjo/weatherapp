@@ -1,16 +1,19 @@
-import { render, waitFor } from '@testing-library/react';
+import { render, waitFor, fireEvent } from '@testing-library/react';
 
 import { Provider } from 'react-redux';
 import React from 'react';
 import WeatherCardsList from './WeatherCardsList';
 import { setCurrentCard } from '../../common/store/components/actions/arrowControlActions';
 import store from '../../store';
+import axios from 'axios';
+
+import { getWeather } from '../store/actions/weatherActions';
 
 const setup = (mockStore, weatherData) => {
   return render(
     <Provider store={mockStore}>
       <WeatherCardsList weatherData={weatherData} />
-    </Provider>
+    </Provider>,
   );
 };
 
@@ -85,7 +88,6 @@ const weatherDataTest = [
 describe('WeatherCardsList', () => {
   let mockStore;
   let container;
-
   beforeEach(() => {
     mockStore = { ...store };
     container = setup(mockStore, weatherDataTest).container;
@@ -96,7 +98,7 @@ describe('WeatherCardsList', () => {
       mockStore.dispatch(setCurrentCard(4));
 
       await waitFor(() =>
-        expect(container.querySelector('.slick-next')).not.toBeInTheDocument()
+        expect(container.querySelector('.slick-next')).not.toBeInTheDocument(),
       );
     });
 
@@ -104,7 +106,7 @@ describe('WeatherCardsList', () => {
       mockStore.dispatch(setCurrentCard(1));
 
       await waitFor(() =>
-        expect(container.querySelector('.slick-next')).toBeInTheDocument()
+        expect(container.querySelector('.slick-next')).toBeInTheDocument(),
       );
     });
 
@@ -112,7 +114,7 @@ describe('WeatherCardsList', () => {
       mockStore.dispatch(setCurrentCard(0));
 
       await waitFor(() =>
-        expect(container.querySelector('.slick-prev')).not.toBeInTheDocument()
+        expect(container.querySelector('.slick-prev')).not.toBeInTheDocument(),
       );
     });
 
@@ -120,8 +122,22 @@ describe('WeatherCardsList', () => {
       mockStore.dispatch(setCurrentCard(1));
 
       await waitFor(() =>
-        expect(container.querySelector('.slick-prev')).toBeInTheDocument()
+        expect(container.querySelector('.slick-prev')).toBeInTheDocument(),
       );
     });
+  });
+
+  describe('Interactios', () => {
+    beforeEach(() => {
+      axios.get = jest.fn().mockReturnValue({ data: weatherDataTest });
+      getWeather();
+    });
+
+    it('should dispatch the selected card when clicking next page', async () => {
+      const nextArrow = container.querySelector('.slick-next');
+      await waitFor(() => fireEvent.click(nextArrow));
+    });
+
+    it('should have the first card from left select when going to the right', () => {});
   });
 });

@@ -10,14 +10,15 @@ import Slider from 'react-slick';
 import WeatherCard from './WeatherCard';
 import { selectCard } from '../store/actions/weatherActions';
 
+const handleCardSelection = (selectedCard, dispatch) => {
+  dispatch(selectCard(selectedCard));
+};
+
 const WeatherCardsList = ({ weatherData }) => {
   const dispatch = useDispatch();
   const arrowControlState = useSelector((state) => state.common.arrowControls);
   const scale = useSelector((state) => state.scale.components);
-
-  const handleCardSelection = (selectedCard) => {
-    dispatch(selectCard(selectedCard));
-  };
+  const weather = useSelector((state) => state.weather.reducer);
 
   return (
     <>
@@ -26,7 +27,8 @@ const WeatherCardsList = ({ weatherData }) => {
           {...settings(
             dispatch,
             arrowControlState.nextArrow,
-            arrowControlState.prevArrow
+            arrowControlState.prevArrow,
+            weather.cards.all,
           )}
         >
           {weatherData.map((data) => (
@@ -34,7 +36,7 @@ const WeatherCardsList = ({ weatherData }) => {
               <WeatherCard
                 info={data}
                 scale={scale}
-                onCardSelection={() => handleCardSelection(data)}
+                onCardSelection={() => handleCardSelection(data, dispatch)}
               />
             </div>
           ))}
@@ -44,7 +46,7 @@ const WeatherCardsList = ({ weatherData }) => {
   );
 };
 
-const settings = (dispatch, nextArrow, prevArrow) => {
+const settings = (dispatch, nextArrow, prevArrow, cards) => {
   return {
     infinite: false,
     speed: 300,
@@ -55,9 +57,18 @@ const settings = (dispatch, nextArrow, prevArrow) => {
     prevArrow: getPrevArrow(prevArrow),
     slidesToShow: 3,
     slidesToScroll: 1,
-    beforeChange: (_, curr) => {
+    beforeChange: (prev, curr) => {
       dispatch(setTotalCardsToShow(3));
       dispatch(setCurrentCard(curr));
+      dispatch({ type: 'SELECT_CARD', selected: cards[curr] });
+
+      if(curr < prev) {
+        // moving to the right
+        // implement the logic when going back
+      }
+    },
+    afterChange: (index) => {
+      
     },
     responsive: [
       {

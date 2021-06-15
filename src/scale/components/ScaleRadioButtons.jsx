@@ -5,14 +5,16 @@ import Grid from '@material-ui/core/Grid';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const ScaleRadioButtons = ({ onChange }) => {
+  const scale = useSelector((state) => state.scale.components);
   return (
     <RadioGroup
       row
       aria-label="scales"
       name="scales"
-      defaultValue={FAHRENHEIT}
+      defaultValue={scale}
       onChange={onChange}
     >
       <Grid item container xs={12}>

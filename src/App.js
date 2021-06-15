@@ -14,11 +14,16 @@ const App = () => {
   const error = useSelector((state) => state.weather.error);
 
   useEffect(() => {
+    refreshWeatherData();
+  }, []);
+
+  const refreshWeatherData = () => {
     dispatch(getWeather());
-  }, [dispatch]);
+  };
 
   return (
     <div className="App">
+      <button onClick={refreshWeatherData}>Refresh</button>
       {loading || alert?.message ? <LoadingScreen /> : <WeatherInfoScreen />}
       {alert?.message && (
         <AlertDialog
