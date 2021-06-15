@@ -60,12 +60,6 @@ describe('WeatherInfoScreen', () => {
       expect(cardsList).toBeInTheDocument();
     });
 
-    it('dose not display bar chart information if no card selected', () => {
-      const { queryByTestId } = setup(mockStore);
-
-      expect(queryByTestId('weatherBarChartList').children.length).toBe(0);
-    });
-
     it('displays bar chart information from a selected weather card', async () => {
       const { findByTestId, container } = setup(mockStore);
 

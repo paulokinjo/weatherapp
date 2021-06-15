@@ -50,6 +50,8 @@ export const filterCardsByDate = (data) => {
         selected: [],
       },
     });
+
+    selectCard(cards[0])(dispatch);
   };
 };
 
@@ -69,10 +71,12 @@ export const getWeather = () => {
           .concat(process.env.REACT_APP_CITY)
           .concat('&APPID=')
           .concat(process.env.REACT_APP_API_KEY)
-          .concat('&cnt=40')
+          .concat('&cnt=40'),
       );
 
-      dispatch({ type: GET_WEATHER, weatherData: request.data.list });
+      const { list } = request.data;
+
+      dispatch({ type: GET_WEATHER, weatherData: list });
 
       dispatch(arrowControlActions.hidePrevArrow());
       dispatch(arrowControlActions.showNextArrow());

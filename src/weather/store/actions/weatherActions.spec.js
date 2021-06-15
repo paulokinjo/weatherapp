@@ -51,17 +51,17 @@ describe('[Actions] Weather', () => {
 
     it('should dispatch an action to hide the previous arrow', async () => {
       const expectedAction = arrowControlActions.hidePrevArrow(false);
-      expect(mockDispatch).toHaveBeenNthCalledWith(3, expectedAction);
+      expect(mockDispatch).toHaveBeenCalledWith(expectedAction);
     });
 
     it('should dispatch an action to show the next arrow', async () => {
       const expectedAction = arrowControlActions.showNextArrow(true);
-      expect(mockDispatch).toHaveBeenNthCalledWith(4, expectedAction);
+      expect(mockDispatch).toHaveBeenCalledWith(expectedAction);
     });
 
     it('should dispatch an action to change loading state to false', async () => {
       const expectedAction = loadingActions.setLoading(false);
-      expect(mockDispatch).toHaveBeenNthCalledWith(5, expectedAction);
+      expect(mockDispatch).toHaveBeenCalledWith(expectedAction);
     });
 
     it('should dispatch error if it fails fetching data', async () => {
@@ -95,6 +95,14 @@ describe('[Actions] Weather', () => {
           ],
           selected: [],
         },
+      };
+      expect(mockDispatch).toHaveBeenCalledWith(expectedAction);
+    });
+
+    it('should dispatch a card selection action when first load', () => {
+      const expectedAction = {
+        type: types.SELECT_CARD,
+        selected: { dt_txt: '2021-04-20 12:00:00' },
       };
       expect(mockDispatch).toHaveBeenCalledWith(expectedAction);
     });
