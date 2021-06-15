@@ -17,4 +17,11 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 );
 
+let localStorageData = localStorage.getItem('weatherapp');
+store.subscribe(() => {
+  if(!localStorageData)
+    localStorage.setItem('weatherapp', JSON.stringify(store.getState()));
+});
+
+
 export default store;
