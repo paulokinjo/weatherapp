@@ -136,8 +136,6 @@ describe('WeatherCardsList', () => {
     it('should dispatch the selected card when clicking next page', async () => {
       const nextArrow = container.querySelector('.slick-next');
       await waitFor(() => fireEvent.click(nextArrow));
-
-      console.log(store.getState().weather.data);
     });
 
     it('should have the first card from left select when going to the right', () => {});

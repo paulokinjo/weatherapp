@@ -81,8 +81,9 @@ export const getWeather = () => {
       dispatch(arrowControlActions.hidePrevArrow());
       dispatch(arrowControlActions.showNextArrow());
     } catch (error) {
-      dispatch({ type: SET_ERROR, error: error.message });
-      dispatch({ type: SET_ALERT, message: error.message });
+      const { message } = error.response.data;
+      dispatch({ type: SET_ERROR, error: message });
+      dispatch({ type: SET_ALERT, message });
     } finally {
       dispatch(loadingActions.setLoading(false));
     }
@@ -90,6 +91,7 @@ export const getWeather = () => {
 };
 
 export const setError = (error) => {
+  console.log(error);
   return {
     type: SET_ERROR,
     error,
