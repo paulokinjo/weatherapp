@@ -38,6 +38,42 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
+# Unit Test Setup with Jest
+> Jest Config
+```bash
+testPathIgnorePatterns: ['<rootDir>/.next', '<rootDir>/node_modules'],
+setupFilesAfterEnv: ['<rootDir>/setupTest.js'],
+moduleNameMapper: {
+  '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+},
+transform: {
+  '^.+\\.(js|jsx|tsx)$': '<rootDir>/node_modules/babel-jest',
+  '^.+\\.jsx?$': require.resolve('babel-jest'),
+  '^.+\\.tsx?$': 'ts-jest',
+},
+testEnvironment: 'jsdom',
+```
+
+> Setup
+```bash
+import '@testing-library/jest-dom'
+```
+
+> Libraries
+```bash
+@babel/preset-env
+@babel/preset-typescript
+@testing-library/jest-dom
+@testing-library/react
+@types/node
+@types/react
+identity-obj-proxy
+jest
+ts-jest
+ts-node
+typescript
+```
+
 ### `yarn test`
 
 Launches the test runner in the interactive watch mode.\
